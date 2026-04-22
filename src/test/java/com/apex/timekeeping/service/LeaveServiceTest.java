@@ -11,12 +11,13 @@ import com.apex.timekeeping.domain.repository.EmployeeRepository;
 import com.apex.timekeeping.domain.repository.LeaveBalanceRepository;
 import com.apex.timekeeping.domain.repository.LeaveRequestRepository;
 import com.apex.timekeeping.domain.repository.LeaveTypeRepository;
+import com.apex.timekeeping.service.impl.LeaveServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -35,9 +36,9 @@ class LeaveServiceTest {
     @Mock private LeaveTypeRepository leaveTypeRepository;
     @Mock private EmployeeRepository employeeRepository;
     @Mock private EmailService emailService;
+    @Mock private ModelMapper modelMapper;
 
-    @InjectMocks
-    private LeaveService leaveService;
+    private LeaveServiceImpl leaveService;
 
     private Employee employee;
     private LeaveType leaveType;
@@ -45,6 +46,14 @@ class LeaveServiceTest {
 
     @BeforeEach
     void setUp() {
+        // Constructor order matches field declaration in LeaveServiceImpl:
+        // leaveRequestRepository, leaveBalanceRepository, leaveTypeRepository,
+        // employeeRepository, emailService, modelMapper
+        leaveService = new LeaveServiceImpl(
+                leaveRequestRepository, leaveBalanceRepository,
+                leaveTypeRepository, employeeRepository,
+                emailService, modelMapper);
+
         employee = new Employee();
         employee.setUserId(1L);
         employee.setFullname("Test User");
@@ -90,6 +99,10 @@ class LeaveServiceTest {
         saved.setReason(req.getReason());
         saved.setStatus(com.apex.timekeeping.common.enums.ApprovalStatus.PENDING);
         when(leaveRequestRepository.save(any())).thenReturn(saved);
+
+        LeaveRequestResponse mapped = new LeaveRequestResponse();
+        mapped.setRequestId(100L);
+        when(modelMapper.map(any(LeaveRequest.class), eq(LeaveRequestResponse.class))).thenReturn(mapped);
 
         LeaveRequestResponse response = leaveService.create(1L, req);
 

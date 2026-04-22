@@ -32,15 +32,24 @@ public class Project {
     @Column(name = "status", length = 20)
     private String status = "ACTIVE"; // ACTIVE, COMPLETED, CANCELLED
 
-    @Column(name = "start_date")
-    private LocalDate startDate;
+    @Column(name = "start_date_plan")
+    private LocalDate startDatePlan;
 
-    @Column(name = "end_date")
-    private LocalDate endDate;
+    @Column(name = "end_date_plan")
+    private LocalDate endDatePlan;
+
+    @Column(name = "start_date_actual")
+    private LocalDate startDateActual;
+
+    @Column(name = "end_date_actual")
+    private LocalDate endDateActual;
+
+    @Column(name = "status_delete")
+    private Boolean statusDelete = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "manager_id")
-    private Employee manager;
+    @JoinColumn(name = "leader_id")
+    private Employee leader;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;

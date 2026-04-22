@@ -15,7 +15,9 @@ public class ProjectRequest {
     private String projectName;
 
     private String description;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private Long managerId;
+    private LocalDate startDatePlan;
+    private LocalDate endDatePlan;
+    private LocalDate startDateActual;
+    private LocalDate endDateActual;
+    private Long leaderId;
 }

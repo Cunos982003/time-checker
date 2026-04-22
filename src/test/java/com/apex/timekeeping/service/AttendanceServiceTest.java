@@ -5,10 +5,10 @@ import com.apex.timekeeping.domain.dto.attendance.AttendanceResponse;
 import com.apex.timekeeping.domain.entity.Employee;
 import com.apex.timekeeping.domain.entity.TimeEntry;
 import com.apex.timekeeping.domain.repository.*;
+import com.apex.timekeeping.service.impl.AttendanceServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -30,13 +30,17 @@ class AttendanceServiceTest {
     @Mock private EmployeeRepository employeeRepository;
     @Mock private EmailService emailService;
 
-    @InjectMocks
-    private AttendanceService attendanceService;
+    private AttendanceServiceImpl attendanceService;
 
     private Employee employee;
 
     @BeforeEach
     void setUp() {
+        attendanceService = new AttendanceServiceImpl(
+                timeEntryRepository, workingDayRepository,
+                timeExplanationRepository, confirmExplanationRepository,
+                employeeRepository, emailService);
+
         employee = new Employee();
         employee.setUserId(1L);
         employee.setFullname("Test User");

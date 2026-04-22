@@ -5,7 +5,7 @@ import com.apex.timekeeping.common.PagedResponse;
 import com.apex.timekeeping.domain.dto.notification.NotificationRequest;
 import com.apex.timekeeping.domain.dto.notification.NotificationResponse;
 import com.apex.timekeeping.security.CustomUserDetails;
-import com.apex.timekeeping.service.NotificationService;
+import com.apex.timekeeping.service.INotificationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Notifications")
 public class NotificationController {
 
-    private final NotificationService notificationService;
+    private final INotificationService notificationService;
 
     @GetMapping
     public ResponseEntity<ApiResponse<PagedResponse<NotificationResponse>>> list(

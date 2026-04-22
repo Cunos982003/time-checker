@@ -17,5 +17,5 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 
     Page<Project> findByStatus(String status, Pageable pageable);
 
-    Page<Project> findByManager_UserId(Long managerId, Pageable pageable);
+    Page<Project> findByLeader_UserId(Long leaderId, Pageable pageable);
 }

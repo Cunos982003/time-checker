@@ -6,7 +6,7 @@ import com.apex.timekeeping.domain.dto.leave.LeaveBalanceResponse;
 import com.apex.timekeeping.domain.dto.leave.LeaveRequestDto;
 import com.apex.timekeeping.domain.dto.leave.LeaveRequestResponse;
 import com.apex.timekeeping.security.CustomUserDetails;
-import com.apex.timekeeping.service.LeaveService;
+import com.apex.timekeeping.service.ILeaveService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ import java.util.List;
 @Tag(name = "Leave")
 public class LeaveController {
 
-    private final LeaveService leaveService;
+    private final ILeaveService leaveService;
 
     @GetMapping("/balance")
     public ResponseEntity<ApiResponse<List<LeaveBalanceResponse>>> balance(@AuthenticationPrincipal CustomUserDetails user) {

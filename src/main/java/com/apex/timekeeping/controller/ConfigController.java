@@ -15,7 +15,12 @@ import com.apex.timekeeping.domain.dto.project.ProjectRequest;
 import com.apex.timekeeping.domain.dto.project.ProjectResponse;
 import com.apex.timekeeping.domain.dto.workingday.WorkingDayRequest;
 import com.apex.timekeeping.domain.dto.workingday.WorkingDayResponse;
-import com.apex.timekeeping.service.*;
+import com.apex.timekeeping.service.IDepartmentService;
+import com.apex.timekeeping.service.IPositionService;
+import com.apex.timekeeping.service.IEmployeeService;
+import com.apex.timekeeping.service.IProjectService;
+import com.apex.timekeeping.service.IWorkingDayService;
+import com.apex.timekeeping.service.ILeaveTypeService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -33,12 +38,12 @@ import java.util.List;
 @Tag(name = "Configuration (Admin)")
 public class ConfigController {
 
-    private final DepartmentService departmentService;
-    private final PositionService positionService;
-    private final EmployeeService employeeService;
-    private final ProjectService projectService;
-    private final WorkingDayService workingDayService;
-    private final LeaveTypeService leaveTypeService;
+    private final IDepartmentService departmentService;
+    private final IPositionService positionService;
+    private final IEmployeeService employeeService;
+    private final IProjectService projectService;
+    private final IWorkingDayService workingDayService;
+    private final ILeaveTypeService leaveTypeService;
 
     // --- Departments ---
     @GetMapping("/departments")

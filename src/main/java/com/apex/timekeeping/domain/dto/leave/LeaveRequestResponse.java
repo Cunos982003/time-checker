@@ -1,7 +1,9 @@
 package com.apex.timekeeping.domain.dto.leave;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -9,6 +11,8 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class LeaveRequestResponse {
     private Long requestId;
     private String employeeName;

@@ -5,7 +5,7 @@ import com.apex.timekeeping.common.PagedResponse;
 import com.apex.timekeeping.domain.dto.ot.OtRequest;
 import com.apex.timekeeping.domain.dto.ot.OtResponse;
 import com.apex.timekeeping.security.CustomUserDetails;
-import com.apex.timekeeping.service.OtService;
+import com.apex.timekeeping.service.IOtService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ import java.util.List;
 @Tag(name = "Overtime")
 public class OtController {
 
-    private final OtService otService;
+    private final IOtService otService;
 
     @PostMapping
     public ResponseEntity<ApiResponse<OtResponse>> create(

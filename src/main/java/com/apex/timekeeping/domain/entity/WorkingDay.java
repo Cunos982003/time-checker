@@ -24,4 +24,7 @@ public class WorkingDay {
 
     @Column(name = "ot_rate", precision = 5, scale = 2)
     private java.math.BigDecimal otRate;
+
+    @Column(name = "description", length = 500)
+    private String description;
 }

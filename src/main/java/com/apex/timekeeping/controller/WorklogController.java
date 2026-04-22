@@ -5,7 +5,7 @@ import com.apex.timekeeping.common.PagedResponse;
 import com.apex.timekeeping.domain.dto.worklog.WorklogRequest;
 import com.apex.timekeeping.domain.dto.worklog.WorklogResponse;
 import com.apex.timekeeping.security.CustomUserDetails;
-import com.apex.timekeeping.service.WorklogService;
+import com.apex.timekeeping.service.IWorklogService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ import java.util.List;
 @Tag(name = "Worklog")
 public class WorklogController {
 
-    private final WorklogService worklogService;
+    private final IWorklogService worklogService;
 
     @PostMapping
     public ResponseEntity<ApiResponse<WorklogResponse>> create(

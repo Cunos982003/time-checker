@@ -7,7 +7,7 @@ import com.apex.timekeeping.domain.dto.attendance.AttendanceResponse;
 import com.apex.timekeeping.domain.dto.attendance.TimeExplanationRequest;
 import com.apex.timekeeping.domain.dto.attendance.TimeExplanationResponse;
 import com.apex.timekeeping.security.CustomUserDetails;
-import com.apex.timekeeping.service.AttendanceService;
+import com.apex.timekeeping.service.IAttendanceService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ import java.util.List;
 @Tag(name = "Attendance")
 public class AttendanceController {
 
-    private final AttendanceService attendanceService;
+    private final IAttendanceService attendanceService;
 
     @PostMapping("/checkin")
     public ResponseEntity<ApiResponse<AttendanceResponse>> checkIn(@AuthenticationPrincipal CustomUserDetails user) {

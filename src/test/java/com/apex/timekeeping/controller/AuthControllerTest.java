@@ -2,35 +2,37 @@ package com.apex.timekeeping.controller;
 
 import com.apex.timekeeping.domain.dto.auth.LoginRequest;
 import com.apex.timekeeping.domain.dto.auth.LoginResponse;
-import com.apex.timekeeping.service.AuthService;
+import com.apex.timekeeping.service.IAuthService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(AuthController.class)
+@ExtendWith(MockitoExtension.class)
 class AuthControllerTest {
 
-    @Autowired
+    @Mock
+    private IAuthService authService;
+
     private MockMvc mockMvc;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @MockBean
-    private AuthService authService;
+    @BeforeEach
+    void setUp() {
+        mockMvc = MockMvcBuilders.standaloneSetup(new AuthController(authService)).build();
+    }
 
     @Test
-    @WithAnonymousUser
     void login_validCredentials_returns200() throws Exception {
         LoginRequest req = new LoginRequest();
         req.setUsername("admin");
@@ -63,7 +65,6 @@ class AuthControllerTest {
     }
 
     @Test
-    @WithAnonymousUser
     void login_missingUsername_returns400() throws Exception {
         LoginRequest req = new LoginRequest();
         req.setPassword("Admin@123");

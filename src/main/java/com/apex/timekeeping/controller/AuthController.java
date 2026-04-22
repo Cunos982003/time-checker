@@ -5,7 +5,7 @@ import com.apex.timekeeping.domain.dto.auth.LoginRequest;
 import com.apex.timekeeping.domain.dto.auth.LoginResponse;
 import com.apex.timekeeping.domain.dto.auth.RefreshTokenRequest;
 import com.apex.timekeeping.security.CustomUserDetails;
-import com.apex.timekeeping.service.AuthService;
+import com.apex.timekeeping.service.IAuthService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Authentication")
 public class AuthController {
 
-    private final AuthService authService;
+    private final IAuthService authService;
 
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<LoginResponse>> login(@Valid @RequestBody LoginRequest req) {

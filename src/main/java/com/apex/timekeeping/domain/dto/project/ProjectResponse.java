@@ -13,8 +13,10 @@ public class ProjectResponse {
     private String projectName;
     private String description;
     private String status;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private String managerName;
-    private Long managerId;
+    private LocalDate startDatePlan;
+    private LocalDate endDatePlan;
+    private LocalDate startDateActual;
+    private LocalDate endDateActual;
+    private String leaderName;
+    private Long leaderId;
 }

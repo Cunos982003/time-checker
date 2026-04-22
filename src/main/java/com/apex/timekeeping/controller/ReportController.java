@@ -5,7 +5,7 @@ import com.apex.timekeeping.domain.dto.report.DailyAttendanceReport;
 import com.apex.timekeeping.domain.dto.report.MonthlyAttendanceReport;
 import com.apex.timekeeping.domain.dto.report.WorkSummaryReport;
 import com.apex.timekeeping.service.ExcelExportService;
-import com.apex.timekeeping.service.ReportService;
+import com.apex.timekeeping.service.IReportService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,7 +23,7 @@ import java.util.List;
 @Tag(name = "Reports")
 public class ReportController {
 
-    private final ReportService reportService;
+    private final IReportService reportService;
     private final ExcelExportService excelExportService;
 
     // --- Daily attendance ---

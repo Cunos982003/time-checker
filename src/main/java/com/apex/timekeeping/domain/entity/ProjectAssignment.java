@@ -28,9 +28,15 @@ public class ProjectAssignment {
     @JoinColumn(name = "user_id", nullable = false)
     private Employee employee;
 
-    @Column(name = "assigned_date")
-    private LocalDate assignedDate = LocalDate.now();
+    @Column(name = "start_date")
+    private LocalDate startDate = LocalDate.now();
 
-    @Column(name = "role_in_project", length = 100)
-    private String roleInProject;
+    @Column(name = "end_date")
+    private LocalDate endDate;
+
+    @Column(name = "role", length = 100)
+    private String role;
+
+    @Column(name = "status", length = 20)
+    private String status = "ACTIVE";
 }

@@ -9,12 +9,14 @@ import com.apex.timekeeping.domain.repository.EmployeeRepository;
 import com.apex.timekeeping.domain.repository.ProjectRepository;
 import com.apex.timekeeping.domain.repository.WorklogConfirmationRepository;
 import com.apex.timekeeping.domain.repository.WorklogRepository;
+import com.apex.timekeeping.service.EmailService;
+import com.apex.timekeeping.service.impl.WorklogServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -32,14 +34,22 @@ class WorklogServiceTest {
     @Mock private WorklogConfirmationRepository worklogConfirmationRepository;
     @Mock private EmployeeRepository employeeRepository;
     @Mock private ProjectRepository projectRepository;
+    @Mock private EmailService emailService;
+    @Mock private ModelMapper modelMapper;
 
-    @InjectMocks
-    private WorklogService worklogService;
+    private WorklogServiceImpl worklogService;
 
     private Employee employee;
 
     @BeforeEach
     void setUp() {
+        // Constructor order matches field declaration in WorklogServiceImpl:
+        // worklogRepository, worklogConfirmationRepository, projectRepository, employeeRepository, emailService, modelMapper
+        worklogService = new WorklogServiceImpl(
+                worklogRepository, worklogConfirmationRepository,
+                projectRepository, employeeRepository,
+                emailService, modelMapper);
+
         employee = new Employee();
         employee.setUserId(1L);
         employee.setFullname("Test User");
@@ -63,6 +73,10 @@ class WorklogServiceTest {
         saved.setStatus(com.apex.timekeeping.common.enums.ApprovalStatus.PENDING);
         saved.setWorkHours(BigDecimal.valueOf(8));
         when(worklogRepository.save(any())).thenReturn(saved);
+
+        WorklogResponse mapped = new WorklogResponse();
+        mapped.setWorklogId(5L);
+        when(modelMapper.map(any(Worklog.class), eq(WorklogResponse.class))).thenReturn(mapped);
 
         WorklogResponse response = worklogService.create(1L, req);
 
