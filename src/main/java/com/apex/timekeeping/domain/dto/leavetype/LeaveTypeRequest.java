@@ -18,8 +18,8 @@ public class LeaveTypeRequest {
     private String typeName;
 
     private BigDecimal maxDaysPerYear;
-    private final Boolean isPaid = true;
-    private final Boolean requiresApproval = true;
+    private Boolean isPaid = true;
+    private Boolean requiresApproval = true;
     private String description;
-    private final Boolean isActive = true;
+    private Boolean isActive = true;
 }

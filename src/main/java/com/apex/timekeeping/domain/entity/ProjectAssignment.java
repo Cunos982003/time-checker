@@ -29,7 +29,7 @@ public class ProjectAssignment {
     private Employee employee;
 
     @Column(name = "assigned_date")
-    private final LocalDate assignedDate = LocalDate.now();
+    private LocalDate assignedDate = LocalDate.now();
 
     @Column(name = "role_in_project", length = 100)
     private String roleInProject;

@@ -30,8 +30,8 @@ public class RefreshToken {
     private Instant expiresAt;
 
     @Column(name = "revoked")
-    private final Boolean revoked = false;
+    private Boolean revoked = false;
 
     @Column(name = "created_at", updatable = false)
-    private final Instant createdAt = Instant.now();
+    private Instant createdAt = Instant.now();
 }

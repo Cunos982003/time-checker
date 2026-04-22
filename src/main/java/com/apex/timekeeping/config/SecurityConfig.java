@@ -19,6 +19,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -42,29 +47,29 @@ public class SecurityConfig {
                 .requestMatchers("/actuator/health").permitAll()
 
                 // Config write operations – ADMIN only
-                .requestMatchers(HttpMethod.POST, "/api/config/departments/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.PUT,  "/api/config/departments/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE,"/api/config/departments/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/api/config/positions/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.PUT,  "/api/config/positions/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/api/config/employees/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.PUT,  "/api/config/employees/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/api/config/projects/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.PUT,  "/api/config/projects/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST,   "/api/config/departments/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT,    "/api/config/departments/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/config/departments/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST,   "/api/config/positions/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT,    "/api/config/positions/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST,   "/api/config/employees/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT,    "/api/config/employees/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST,   "/api/config/projects/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT,    "/api/config/projects/**").hasRole("ADMIN")
 
                 // Notification write – ADMIN or STAFF
-                .requestMatchers(HttpMethod.POST, "/api/notifications/**").hasAnyRole("ADMIN","STAFF")
-                .requestMatchers(HttpMethod.PUT,  "/api/notifications/**").hasAnyRole("ADMIN","STAFF")
-                .requestMatchers(HttpMethod.DELETE,"/api/notifications/**").hasAnyRole("ADMIN","STAFF")
+                .requestMatchers(HttpMethod.POST,   "/api/notifications/**").hasAnyRole("ADMIN", "STAFF")
+                .requestMatchers(HttpMethod.PUT,    "/api/notifications/**").hasAnyRole("ADMIN", "STAFF")
+                .requestMatchers(HttpMethod.DELETE, "/api/notifications/**").hasAnyRole("ADMIN", "STAFF")
 
                 // Report access
-                .requestMatchers("/api/reports/**").hasAnyRole("ADMIN","MANAGER","STAFF")
+                .requestMatchers("/api/reports/**").hasAnyRole("ADMIN", "MANAGER", "STAFF")
 
                 // Approval queues
-                .requestMatchers("/api/time-explanations/pending").hasAnyRole("ADMIN","MANAGER","STAFF")
-                .requestMatchers("/api/leave/requests/pending").hasAnyRole("ADMIN","MANAGER","STAFF")
-                .requestMatchers("/api/ot/pending").hasAnyRole("ADMIN","MANAGER")
-                .requestMatchers("/api/worklogs/pending").hasAnyRole("ADMIN","MANAGER")
+                .requestMatchers("/api/time-explanations/pending").hasAnyRole("ADMIN", "MANAGER", "STAFF")
+                .requestMatchers("/api/leave/requests/pending").hasAnyRole("ADMIN", "MANAGER", "STAFF")
+                .requestMatchers("/api/ot/pending").hasAnyRole("ADMIN", "MANAGER")
+                .requestMatchers("/api/worklogs/pending").hasAnyRole("ADMIN", "MANAGER")
 
                 .anyRequest().authenticated()
             )
@@ -76,9 +81,8 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(passwordEncoder());
         provider.setUserDetailsService(userDetailsService);
-        provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
 
@@ -93,13 +97,13 @@ public class SecurityConfig {
     }
 
     @Bean
-    public org.springframework.web.cors.CorsConfigurationSource corsConfigurationSource() {
-        org.springframework.web.cors.CorsConfiguration cfg = new org.springframework.web.cors.CorsConfiguration();
-        cfg.setAllowedOriginPatterns(java.util.List.of("*"));
-        cfg.setAllowedMethods(java.util.List.of("GET","POST","PUT","DELETE","PATCH","OPTIONS"));
-        cfg.setAllowedHeaders(java.util.List.of("*"));
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration cfg = new CorsConfiguration();
+        cfg.setAllowedOriginPatterns(List.of("*"));
+        cfg.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+        cfg.setAllowedHeaders(List.of("*"));
         cfg.setAllowCredentials(true);
-        org.springframework.web.cors.UrlBasedCorsConfigurationSource source = new org.springframework.web.cors.UrlBasedCorsConfigurationSource();
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", cfg);
         return source;
     }

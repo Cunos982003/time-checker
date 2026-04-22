@@ -32,7 +32,7 @@ public class LeavePolicy {
     private BigDecimal entitledDays;
 
     @Column(name = "carry_over_days", precision = 5, scale = 1)
-    private final BigDecimal carryOverDays = BigDecimal.ZERO;
+    private BigDecimal carryOverDays = BigDecimal.ZERO;
 
     @Column(name = "effective_year", nullable = false)
     private Integer effectiveYear;

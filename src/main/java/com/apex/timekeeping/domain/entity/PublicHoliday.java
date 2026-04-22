@@ -27,8 +27,8 @@ public class PublicHoliday {
     private String name;
 
     @Column(name = "is_recurring")
-    private final Boolean isRecurring = false;
+    private Boolean isRecurring = false;
 
     @Column(name = "created_at")
-    private final LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt = LocalDateTime.now();
 }

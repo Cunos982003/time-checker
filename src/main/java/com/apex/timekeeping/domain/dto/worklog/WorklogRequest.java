@@ -23,7 +23,7 @@ public class WorklogRequest {
     @NotBlank
     private String content;
 
-    private final String workType = "NORMAL"; // NORMAL or OT
+    private String workType = "NORMAL"; // NORMAL or OT
 
     private Long projectId;
 }

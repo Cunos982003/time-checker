@@ -34,7 +34,7 @@ public class Employee {
     private String phone;
 
     @Column(name = "status", length = 20)
-    private final String status = "ACTIVE";   // ACTIVE, INACTIVE, RESIGNED
+    private String status = "ACTIVE";   // ACTIVE, INACTIVE, RESIGNED
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")

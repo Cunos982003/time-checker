@@ -47,11 +47,11 @@ public class Worklog {
     private String content;
 
     @Column(name = "work_type", length = 20)
-    private final String workType = "NORMAL"; // NORMAL, OT
+    private String workType = "NORMAL"; // NORMAL, OT
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, length = 20)
-    private final ApprovalStatus status = ApprovalStatus.PENDING;
+    private ApprovalStatus status = ApprovalStatus.PENDING;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;

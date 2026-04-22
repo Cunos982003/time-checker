@@ -30,7 +30,7 @@ public class Project {
     private String description;
 
     @Column(name = "status", length = 20)
-    private final String status = "ACTIVE"; // ACTIVE, COMPLETED, CANCELLED
+    private String status = "ACTIVE"; // ACTIVE, COMPLETED, CANCELLED
 
     @Column(name = "start_date")
     private LocalDate startDate;

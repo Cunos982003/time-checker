@@ -42,5 +42,5 @@ public class AuditLog {
     private String ipAddress;
 
     @Column(name = "created_at")
-    private final OffsetDateTime createdAt = OffsetDateTime.now();
+    private OffsetDateTime createdAt = OffsetDateTime.now();
 }

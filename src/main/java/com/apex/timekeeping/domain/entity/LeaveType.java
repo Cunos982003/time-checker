@@ -29,14 +29,14 @@ public class LeaveType {
     private BigDecimal maxDaysPerYear;
 
     @Column(name = "is_paid")
-    private final Boolean isPaid = true;
+    private Boolean isPaid = true;
 
     @Column(name = "requires_approval")
-    private final Boolean requiresApproval = true;
+    private Boolean requiresApproval = true;
 
     @Column(name = "description", length = 500)
     private String description;
 
     @Column(name = "is_active")
-    private final Boolean isActive = true;
+    private Boolean isActive = true;
 }

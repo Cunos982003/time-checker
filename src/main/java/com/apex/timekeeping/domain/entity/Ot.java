@@ -35,7 +35,7 @@ public class Ot {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, length = 20)
-    private final ApprovalStatus status = ApprovalStatus.PENDING;
+    private ApprovalStatus status = ApprovalStatus.PENDING;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "confirm_by")

@@ -24,7 +24,7 @@ public class TimeExplanation {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, length = 20)
-    private final ApprovalStatus status = ApprovalStatus.PENDING;
+    private ApprovalStatus status = ApprovalStatus.PENDING;
 
     @Column(name = "picture", length = 500)
     private String picture;    // file path or URL

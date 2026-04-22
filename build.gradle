@@ -1,8 +1,9 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.2.5'
-    id 'io.spring.dependency-management' version '1.1.4'
+    id 'org.springframework.boot' version '4.0.5'
+    id 'io.spring.dependency-management' version '1.1.7'
 }
+
 
 group = 'com.apex'
 version = '1.0.0-SNAPSHOT'
@@ -23,69 +24,37 @@ repositories {
 }
 
 ext {
-    jjwtVersion       = '0.12.5'
+    jjwtVersion       = '0.12.6'
     mapstructVersion  = '1.5.5.Final'
-    springdocVersion  = '2.3.0'
-    poiVersion        = '5.2.5'
+    springdocVersion  = '3.0.0'
+    poiVersion        = '5.4.0'
 }
 
 dependencies {
-
-    // Web
     implementation 'org.springframework.boot:spring-boot-starter-web'
-
-    // Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
-
-    // Data JPA
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
-    // Validation
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-
-    // Mail
     implementation 'org.springframework.boot:spring-boot-starter-mail'
-
-    // Thymeleaf (email templates)
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time'
-
-    // PostgreSQL
     runtimeOnly 'org.postgresql:postgresql'
-
-    // Flyway
     implementation 'org.flywaydb:flyway-core'
     implementation 'org.flywaydb:flyway-database-postgresql'
-
-    // JWT
     implementation "io.jsonwebtoken:jjwt-api:${jjwtVersion}"
     runtimeOnly   "io.jsonwebtoken:jjwt-impl:${jjwtVersion}"
     runtimeOnly   "io.jsonwebtoken:jjwt-jackson:${jjwtVersion}"
-
-    // Lombok
     compileOnly             'org.projectlombok:lombok'
     annotationProcessor     'org.projectlombok:lombok'
     testCompileOnly         'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
-
-    // MapStruct
     implementation         "org.mapstruct:mapstruct:${mapstructVersion}"
     annotationProcessor    "org.mapstruct:mapstruct-processor:${mapstructVersion}"
-
-    // OpenAPI / Swagger UI
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springdocVersion}"
-
-    // Apache POI (Excel export)
     implementation "org.apache.poi:poi:${poiVersion}"
     implementation "org.apache.poi:poi-ooxml:${poiVersion}"
-
-    // Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
 }
-
-// Ensure MapStruct annotation processor runs after Lombok so Lombok-generated
-// builders/setters are visible to MapStruct during compilation.
 compileJava {
     options.compilerArgs += [
         '-Amapstruct.defaultComponentModel=spring',

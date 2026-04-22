@@ -27,7 +27,7 @@ public class Department {
     private String departDescription;
 
     @Column(name = "status", length = 20)
-    private final String status = "ACTIVE";
+    private String status = "ACTIVE";
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id")

@@ -30,7 +30,7 @@ public class Notification {
     private Employee createdBy;
 
     @Column(name = "is_active")
-    private final Boolean isActive = true;
+    private Boolean isActive = true;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;

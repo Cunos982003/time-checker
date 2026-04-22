@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 @Getter
+@SuppressWarnings("deprecation")
 public class BusinessException extends RuntimeException {
     private final HttpStatus status;
 

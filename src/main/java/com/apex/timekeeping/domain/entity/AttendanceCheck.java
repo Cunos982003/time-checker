@@ -23,10 +23,10 @@ public class AttendanceCheck {
     private LocalDate aDate;
 
     @Column(name = "ct_quit_early")
-    private final Integer ctQuitEarly = 0;
+    private Integer ctQuitEarly = 0;
 
     @Column(name = "ct_checkin_late")
-    private final Integer ctCheckinLate = 0;
+    private Integer ctCheckinLate = 0;
 
     @Column(name = "confirm_date")
     private LocalDate confirmDate;

@@ -32,16 +32,16 @@ public class LeaveBalance {
     private Integer year;
 
     @Column(name = "entitled_days", precision = 5, scale = 1)
-    private final BigDecimal entitledDays = BigDecimal.ZERO;
+    private BigDecimal entitledDays = BigDecimal.ZERO;
 
     @Column(name = "used_days", precision = 5, scale = 1)
-    private final BigDecimal usedDays = BigDecimal.ZERO;
+    private BigDecimal usedDays = BigDecimal.ZERO;
 
     @Column(name = "pending_days", precision = 5, scale = 1)
-    private final BigDecimal pendingDays = BigDecimal.ZERO;
+    private BigDecimal pendingDays = BigDecimal.ZERO;
 
     @Column(name = "adjusted_days", precision = 5, scale = 1)
-    private final BigDecimal adjustedDays = BigDecimal.ZERO;
+    private BigDecimal adjustedDays = BigDecimal.ZERO;
 
     // available = entitled + adjusted - used - pending (computed in service)
 }
